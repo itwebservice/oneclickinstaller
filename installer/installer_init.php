@@ -196,6 +196,7 @@ if($empty_setup=="Yes"){
     $generic_query = $conn->query("update generic_count_master set a_enquiry_count = '0', a_temp_enq_count='0', a_task_count='0', a_temp_task_count='0',b_enquiry_count = '0', b_temp_enq_count='0', b_task_count='0', b_temp_task_count='0', setup_country_id='$country',a_leave_count='0', setup_type='$setup_type', setup_creator='$creator_name', setup_created_at='$today_date' where id='1'");
 
     $generic_query = $conn->query("update app_settings set quot_format = '4', quot_img_url='http://itourscloud.com/quotation_format_images/Portrait Creative/1.jpg' where setting_id='1'");
+    $generic_query = $conn->query("UPDATE `b2b_settings_second` SET `entry_id`='1',`col1`='',`col2`='',`col3`='',`terms_cond`='',`privacy_policy`='',`cancellation_policy`='',`refund_policy`='',`careers_policy`='',`footer_strip`='' WHERE entry_id='1'");
     
     $sq_user = $conn->query("update roles set user_name='$admin_username', password='$admin_password' where id='1'"); 
      
