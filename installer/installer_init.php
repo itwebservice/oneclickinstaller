@@ -1,4 +1,5 @@
 <?php
+$secret_key = "secret_key_for_iTours";
 $product_name = $_POST['product_name'];
 $database_name = $_POST['database_name'];
 $empty_setup = $_POST['empty_setup'];
@@ -190,7 +191,38 @@ if($empty_setup=="Yes"){
     $admin_username = strtolower($product_name);
     $admin_username = explode(' ', $admin_username);
     $admin_username = implode(' ', $admin_username);
-    $admin_password = $admin_username.rand(1000,9999); 
+    $admin_password = $admin_username.rand(1000,9999);
+    //Encrypt username and password
+    $admin_username = rtrim(
+        base64_encode(
+            mcrypt_encrypt(
+                MCRYPT_RIJNDAEL_256,
+                $secret_key, $admin_username, 
+                MCRYPT_MODE_ECB, 
+                mcrypt_create_iv(
+                    mcrypt_get_iv_size(
+                        MCRYPT_RIJNDAEL_256, 
+                        MCRYPT_MODE_ECB
+                    ), 
+                    MCRYPT_RAND)
+                )
+            ), "\0"
+        );
+    $admin_password = rtrim(
+        base64_encode(
+            mcrypt_encrypt(
+                MCRYPT_RIJNDAEL_256,
+                $secret_key, $admin_password, 
+                MCRYPT_MODE_ECB, 
+                mcrypt_create_iv(
+                    mcrypt_get_iv_size(
+                        MCRYPT_RIJNDAEL_256, 
+                        MCRYPT_MODE_ECB
+                    ), 
+                    MCRYPT_RAND)
+                )
+            ), "\0"
+        );
 
     $today_date = date('Y-m-d H:i');
     $generic_query = $conn->query("update generic_count_master set a_enquiry_count = '0', a_temp_enq_count='0', a_task_count='0', a_temp_task_count='0',b_enquiry_count = '0', b_temp_enq_count='0', b_task_count='0', b_temp_task_count='0', setup_country_id='$country',a_leave_count='0', setup_type='$setup_type', setup_creator='$creator_name', setup_created_at='$today_date' where id='1'");
