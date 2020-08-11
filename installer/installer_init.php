@@ -233,6 +233,7 @@ if($empty_setup=="Yes"){
     $sq_user = $conn->query("update roles set user_name='$admin_username', password='$admin_password' where id='1'"); 
      
     
+    unlink($destination.'/view/dashboard/business_rule.txt');
     $conn->close();
     //=========================Emptying tables data end================================//
 }
