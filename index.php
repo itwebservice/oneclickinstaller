@@ -120,10 +120,10 @@ if($conn->connect_error){
 					<input type="number" id="currency_rate" name="currency_rate" class="form-control" placeholder="*Currency Rate" title="Enter Currency Rate" required>
 				</div>
 				<div class="col-md-3">
-					<input type="text" id="ffrom_date" name="ffrom_date" class="form-control" placeholder="*FY From date" title="Enter FY From date" required>
+					<input type="text" id="ffrom_date" name="ffrom_date" class="form-control" placeholder="*FY From date" title="Enter Financial Year From date" required>
 				</div>
 				<div class="col-md-3">
-					<input type="text" id="fto_date" name="fto_date" class="form-control" placeholder="*FY To date" title="Enter FY To date" required>
+					<input type="text" id="fto_date" name="fto_date" class="form-control" placeholder="*FY To date" title="Enter Financial Year To date" required>
 				</div>
 				<div class="col-md-3">
 					<input type="text" id="location" name="location" class="form-control" placeholder="*Location Name" title="Enter Location name" required>
