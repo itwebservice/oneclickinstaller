@@ -25,7 +25,7 @@ $source_db = "v7";
 $source = "../../V7";
 $destination = '../Projects/'.$product_name;
 
-$table_exclude = array('state_and_cities', 'user_assigned_roles', 'roles', 'role_master', 'travel_station_master', 'bus_master', 'tour_budget_type', 'bank_name_master', 'bank_list_master', 'transport_agency_bus_master', 'city_master', 'currency_name_master', 'vendor_type_master', 'estimate_type_master', 'airport_list_master', 'references_master', 'country_state_list', 'country_list_master','email_template_master','gallary_master','destination_master','airline_master','airport_master','visa_crm_master','visa_type_master','sac_master','state_master','generic_count_master','office_expense_type','branch_assign','ledger_master','group_master','head_master','subgroup_master','cms_master','cms_master_entries','fixed_asset_master','meal_plan_master','modulewise_video_master','meal_plan_master','room_category_master','hotel_type_master','b2b_settings','b2b_settings_second','tax_conditions','other_charges_master', 'ticket_master_airfile', 'ticket_entries_airfile', 'ticket_trip_entries_airfile','video_itinerary_master','app_settings');
+$table_exclude = array('state_and_cities', 'user_assigned_roles', 'roles', 'role_master', 'travel_station_master', 'bus_master', 'tour_budget_type', 'bank_name_master', 'bank_list_master', 'transport_agency_bus_master', 'city_master', 'currency_name_master', 'vendor_type_master', 'estimate_type_master', 'airport_list_master', 'references_master', 'country_state_list', 'country_list_master','email_template_master','gallary_master','destination_master','airline_master','airport_master','visa_crm_master','visa_type_master','sac_master','state_master','generic_count_master','office_expense_type','branch_assign','ledger_master','group_master','head_master','subgroup_master','cms_master','cms_master_entries','fixed_asset_master','meal_plan_master','modulewise_video_master','meal_plan_master','room_category_master','hotel_type_master','b2b_settings','b2b_settings_second','tax_conditions','other_charges_master', 'ticket_master_airfile', 'ticket_entries_airfile', 'ticket_trip_entries_airfile','video_itinerary_master','app_settings','b2b_transfer_master');
 
 if (!file_exists($destination)){
     mkdir($destination, 0777, true);
@@ -258,6 +258,7 @@ if($empty_setup=="Yes"){
     $generic_query = $conn->query("INSERT INTO `branches`(`branch_id`, `location_id`, `branch_name`,`contact_no`,`active_flag`, `created_at`,`state`) VALUES ('1','1','$branch','$contact_no','Active','$today_date1','$state')");
 
     $sq_user = $conn->query("update roles set user_name='$admin_username', password='$admin_password' where id='1'");
+    $query = $conn->query("delete from b2b_transfer_master where entry_id>'5'");
     
     unlink($destination.'/view/cache_data.txt');
     $conn->close();
