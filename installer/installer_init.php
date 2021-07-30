@@ -257,7 +257,7 @@ if($empty_setup=="Yes"){
     $generic_query = $conn->query("INSERT INTO `locations`(`location_id`, `location_name`, `active_flag`, `created_at`) VALUES ('1','$location','Active','$today_date1')");
     $generic_query = $conn->query("INSERT INTO `branches`(`branch_id`, `location_id`, `branch_name`,`contact_no`,`active_flag`, `created_at`,`state`) VALUES ('1','1','$branch','$contact_no','Active','$today_date1','$state')");
 
-    $sq_user = $conn->query("update roles set user_name='$admin_username', password='$admin_password' where id='1'");
+    $sq_user = $conn->query("update roles set user_name='$admin_username', password='$admin_password',emp_id='1' where id='1'");
 
     $sq = $conn->query("insert into emp_master (emp_id, first_name, username, password, address,mobile_no, location_id, branch_id, role_id, active_flag,app_smtp_status) values ('1', '$company_name', '$admin_username', '$admin_password', '$address','$contact_no','1', '1', '1', 'Active','Yes')");
 
