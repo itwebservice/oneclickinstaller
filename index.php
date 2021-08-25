@@ -1,5 +1,5 @@
 <?php
-$conn = new mysqli("localhost", "root", "",'v7');
+$conn = new mysqli("localhost", "root", "",'v8');
 if($conn->connect_error){
 	echo "Connection Failed:".$conn->connect_error;
 	exit;

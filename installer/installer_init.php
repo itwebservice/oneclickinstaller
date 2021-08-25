@@ -21,8 +21,8 @@ $fto_date = $_POST['fto_date'];
 $location = $_POST['location'];
 $branch = $_POST['branch'];
 
-$source_db = "v7";
-$source = "../../V7";
+$source_db = "v8";
+$source = "../../../v7-version-upgrade";
 $destination = '../Projects/'.$product_name;
 
 $table_exclude = array('state_and_cities', 'user_assigned_roles', 'roles', 'role_master', 'travel_station_master', 'bus_master', 'tour_budget_type', 'bank_name_master', 'bank_list_master', 'transport_agency_bus_master', 'city_master', 'currency_name_master', 'vendor_type_master', 'estimate_type_master', 'airport_list_master', 'references_master', 'country_state_list', 'country_list_master','email_template_master','gallary_master','destination_master','airline_master','airport_master','visa_crm_master','visa_type_master','sac_master','state_master','generic_count_master','office_expense_type','branch_assign','ledger_master','group_master','head_master','subgroup_master','cms_master','cms_master_entries','fixed_asset_master','meal_plan_master','modulewise_video_master','meal_plan_master','room_category_master','hotel_type_master','b2b_settings','b2b_settings_second','vehicle_type_master','tax_conditions','other_charges_master', 'ticket_master_airfile', 'ticket_entries_airfile', 'ticket_trip_entries_airfile','video_itinerary_master','app_settings','b2b_transfer_master');
@@ -207,36 +207,23 @@ if($empty_setup=="Yes"){
     $admin_username = implode(' ', $admin_username);
     $admin_password = $admin_username.rand(1000,9999);
     //Encrypt username and password
-    $admin_username = rtrim(
-        base64_encode(
-            mcrypt_encrypt(
-                MCRYPT_RIJNDAEL_256,
-                $secret_key, $admin_username, 
-                MCRYPT_MODE_ECB, 
-                mcrypt_create_iv(
-                    mcrypt_get_iv_size(
-                        MCRYPT_RIJNDAEL_256, 
-                        MCRYPT_MODE_ECB
-                    ), 
-                    MCRYPT_RAND)
-                )
-            ), "\0"
-    );
-    $admin_password = rtrim(
-        base64_encode(
-            mcrypt_encrypt(
-                MCRYPT_RIJNDAEL_256,
-                $secret_key, $admin_password, 
-                MCRYPT_MODE_ECB, 
-                mcrypt_create_iv(
-                    mcrypt_get_iv_size(
-                        MCRYPT_RIJNDAEL_256, 
-                        MCRYPT_MODE_ECB
-                    ), 
-                    MCRYPT_RAND)
-                )
-            ), "\0"
-    );
+    $key = "secret_key_for_iTours";
+    // Store the cipher method
+    $ciphering = "AES-128-CTR";
+            
+    // Use OpenSSl Encryption method
+    $iv_length = openssl_cipher_iv_length($ciphering);
+    $options = 0;
+
+    // Non-NULL Initialization Vector for encryption
+    $encryption_iv = '1234567891011121';
+
+    // Use openssl_encrypt() function to encrypt the data
+    $admin_username = openssl_encrypt($admin_username, $ciphering,
+                $key, $options, $encryption_iv);
+    $admin_password = openssl_encrypt($admin_password, $ciphering,
+                $key, $options, $encryption_iv);
+
 
     $today_date = date('Y-m-d H:i');
     $generic_query = $conn->query("update generic_count_master set a_enquiry_count = '0', a_temp_enq_count='0', a_task_count='0', a_temp_task_count='0',b_enquiry_count = '0', b_temp_enq_count='0', b_task_count='0', b_temp_task_count='0', setup_country_id='$country',a_leave_count='0', setup_type='$setup_type', setup_creator='$creator_name', setup_created_at='$today_date' where id='1'");
