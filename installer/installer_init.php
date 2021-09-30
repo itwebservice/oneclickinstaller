@@ -192,7 +192,7 @@ if($empty_setup=="Yes"){
     $query = $conn->query("delete from ledger_master where ledger_id >= '232'");
     $query = $conn->query("delete from group_master where group_id >= '22'");
     $query = $conn->query("delete from head_master where head_id >= '14'");
-    $query = $conn->query("delete from subgroup_master where subgroup_id >= '113'");
+    $query = $conn->query("delete from subgroup_master where subgroup_id >= '114'");
     $query = $conn->query("delete from gallary_master where entry_id >= '759'");
     $query = $conn->query("delete from sac_master where entry_id >= '14'");
     $query = $conn->query("delete from visa_type_master where entry_id >= '12'");
