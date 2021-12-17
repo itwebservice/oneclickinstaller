@@ -189,7 +189,7 @@ if($empty_setup=="Yes"){
     $query = $conn->query("delete from role_master where role_id not in ('1', '2', '3','4','5','6','7')");
     $query = $conn->query("delete from office_expense_type where expense_type_id >= '21'");
 	$query = $conn->query("delete from roles where id!='1'");
-    $query = $conn->query("delete from ledger_master where ledger_id >= '232'");
+    $query = $conn->query("delete from ledger_master where ledger_id >= '233'");
     $query = $conn->query("delete from group_master where group_id >= '22'");
     $query = $conn->query("delete from head_master where head_id >= '14'");
     $query = $conn->query("delete from subgroup_master where subgroup_id >= '114'");
