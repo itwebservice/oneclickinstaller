@@ -185,7 +185,7 @@ if($empty_setup=="Yes"){
     }
 
     $query = $conn->query("delete from user_assigned_roles where role_id in ('2', '3')");
-    $query = $conn->query("delete from references_master where reference_id not in ('1', '2', '3','4','5','6','7','8')");
+    $query = $conn->query("delete from references_master where reference_id not in ('1', '2', '3','4','5','6','7','8','9','10','11','12')");
     $query = $conn->query("delete from role_master where role_id not in ('1', '2', '3','4','5','6','7')");
     $query = $conn->query("delete from office_expense_type where expense_type_id >= '21'");
 	$query = $conn->query("delete from roles where id!='1'");
