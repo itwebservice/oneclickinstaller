@@ -194,7 +194,7 @@ if($empty_setup=="Yes"){
     $query = $conn->query("delete from head_master where head_id >= '14'");
     $query = $conn->query("delete from subgroup_master where subgroup_id >= '114'");
     $query = $conn->query("delete from gallary_master where entry_id >= '759'");
-    $query = $conn->query("delete from sac_master where sac_id >= '14'");
+    $query = $conn->query("delete from sac_master where sac_id >= '13'");
     $query = $conn->query("delete from visa_type_master where visa_type_id >= '12'");
     if($b2c == 'true'){
         $generic_query = $conn->query("update app_settings set b2c_flag = '1' where setting_id='1'");
