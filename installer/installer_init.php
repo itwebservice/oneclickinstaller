@@ -245,11 +245,13 @@ if($empty_setup=="Yes"){
 
 
     $today_date = date('Y-m-d H:i');
+    $generic_query = $conn->query("update format_image_master set is_selected = '1' where id='895'");
+
     $generic_query = $conn->query("update generic_count_master set a_enquiry_count = '0', a_temp_enq_count='0', a_task_count='0', a_temp_task_count='0',b_enquiry_count = '0', b_temp_enq_count='0', b_task_count='0', b_temp_task_count='0', setup_country_id='$country',a_leave_count='0', setup_type='$setup_type', setup_creator='$creator_name', setup_created_at='$today_date' where id='1'");
 
     $generic_query = $conn->query("UPDATE `app_settings` SET `app_version`='',`app_email_id`='',`currency`='',`app_smtp_status`='',`app_smtp_host`='',`app_smtp_port`='',`app_smtp_password`='',`app_smtp_method`='',`app_contact_no`='',`app_landline_no`='',`service_tax_no`='',`tax_name`='',`app_address`='',`app_website`='',`app_name`='',`app_cin`='',`bank_acc_no`='',`acc_name`='',`bank_name`='',`bank_branch_name`='',`bank_ifsc_code`='',`bank_swift_code`='',`sms_username`='',`sms_password`='',`server_link`='',`server_username`='',`server_password`='',`policy_url`='',`state_id`='',`accountant_email`='',`tax_type`='',`tax_pay_date`='',`credit_card_charges`='',`quot_format`='',`quot_img_url`='',`ip_addresses`='',`transfer_service_time`='',`country`='' WHERE `setting_id`='1'");
 
-    $generic_query = $conn->query("update app_settings set app_name='$company_name',app_website='$website',app_contact_no='$contact_no',app_address='$address',tax_name='$tax_name',country='$country',state_id='$state',currency='$currency',quot_format = '4', quot_img_url='http://itourscloud.com/quotation_format_images/Portrait Creative/1.jpg' where setting_id='1'");
+    $generic_query = $conn->query("update app_settings set app_name='$company_name',app_website='$website',app_contact_no='$contact_no',app_address='$address',tax_name='$tax_name',country='$country',state_id='$state',currency='$currency',quot_format = '4', quot_img_url='https://itourscloud.com/destination_gallery/quotation-gallery/other-quotation-images/flight-portrait-creative.webp' where setting_id='1'");
 
     $generic_query = $conn->query("UPDATE `b2b_settings_second` SET `entry_id`='1',`col1`='',`col2`='',`col3`='',`terms_cond`='',`privacy_policy`='',`cancellation_policy`='',`refund_policy`='',`careers_policy`='',`footer_strip`='' WHERE entry_id='1'");
     
@@ -278,7 +280,7 @@ if($empty_setup=="Yes"){
 else{
     $today_date = date('Y-m-d H:i');
     $generic_query = $conn->query("update generic_count_master set setup_country_id='$country', setup_type='$setup_type', setup_creator='$creator_name', setup_created_at='$today_date',invoice_format='Standard' where id='1'");
-    $generic_query = $conn->query("update app_settings set quot_format = '4', quot_img_url='http://itourscloud.com/quotation_format_images/Portrait Creative/1.jpg' where setting_id='1'");
+    $generic_query = $conn->query("update app_settings set quot_format = '4', quot_img_url='https://itourscloud.com/destination_gallery/quotation-gallery/other-quotation-images/flight-portrait-creative.webp' where setting_id='1'");
     $conn->close();
 }
 echo "New Product is created successfully.";
