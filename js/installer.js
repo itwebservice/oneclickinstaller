@@ -92,8 +92,15 @@ function installer_init()
 	$('button').prop('disabled', true).text('Installing..');
 
 	$.post('installer/installer_init.php', { product_name : product_name, database_name : database_name, empty_setup : empty_setup, setup_type : setup_type, creator_name : creator_name, b2c : b2c, company_name:company_name, website:website, contact_no:contact_no, address:address,tax_name:tax_name, country:country, state:state, currency:currency, currency_rate:currency_rate, ffrom_date:ffrom_date, fto_date:fto_date,location:location, branch:branch }, function(data){
-		alert(data);
-		$('button').prop('disabled', false).text('Install Setup');
+		
+		var msg = data.split('=');
+		alert(msg[0]);
+		var company_details = JSON.parse(msg[1]);
+
+		var result = 'Username : '+company_details[0]['username']+'<br/>'+'Password : '+company_details[0]['password'];
+		$('#company_details_result').html(result);
+
+		$('button').prop('disabled', false).text('Create Setup');
 		$('#product_name').val('');
 		$('#database_name').val('');
 		$('#creator_name').val('');

@@ -136,8 +136,11 @@ if($conn->connect_error){
 			</div>
 			<div class="row text-center" style="margin-top:10px">
 				<div class="col-md-12">
-					<button onclick="installer_init()" class="btn btn-success">Install Application</button>
+					<button onclick="installer_init()" class="btn btn-success">Create Setup</button>
 				</div>
+			</div>
+			<div class="row text-center" style="margin-top:10px">
+				<div id="company_details_result"></div>
 			</div>
 		</div>
 	</div>

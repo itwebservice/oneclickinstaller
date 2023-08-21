@@ -21,8 +21,8 @@ $fto_date = $_POST['fto_date'];
 $location = $_POST['location'];
 $branch = $_POST['branch'];
 
-$source_db = "v8";
-$source = "../../v7-version-upgrade";
+$source_db = "v14";
+$source = "../../V14";
 $destination = '../Projects/'.$product_name;
 
 $table_exclude = array('state_and_cities', 'user_assigned_roles', 'roles', 'role_master', 'bus_master', 'tour_budget_type', 'bank_name_master', 'bank_list_master', 'transport_agency_bus_master', 'city_master', 'currency_name_master', 'vendor_type_master', 'estimate_type_master', 'airport_list_master', 'references_master', 'country_state_list', 'country_list_master','gallary_master','destination_master','airline_master','airport_master','visa_crm_master','visa_type_master','sac_master','state_master','generic_count_master','office_expense_type','branch_assign','ledger_master','group_master','head_master','subgroup_master','cms_master','cms_master_entries','fixed_asset_master','meal_plan_master','modulewise_video_master','meal_plan_master','room_category_master','hotel_type_master','b2b_settings','b2b_settings_second','vehicle_type_master','tax_conditions','other_charges_master', 'ticket_master_airfile', 'ticket_entries_airfile', 'ticket_trip_entries_airfile','video_itinerary_master','app_settings','b2b_transfer_master','itinerary_master','tcs_master','hotel_master','hotel_vendor_images_entries','custom_package_master','custom_package_program','custom_package_hotels','custom_package_transport','custom_package_images','tax_master','format_image_master','service_duration_master','generic_settings');
@@ -102,18 +102,18 @@ foreach($files as $file){ // iterate files
 $dirPath = $destination."/db";
 deleteDirectory($dirPath);
 
-// ////////////////// //Delete GIT folder /////////////////////////
-// $dirPath = $destination."/.git/*";
-// $files = glob($dirPath); // get all file names
-// foreach($files as $file){ // iterate files
-//     if(is_file($file))
-//     unlink($file); // delete file
-// }
-// $dirPath = $destination."/.git";
-// empty_dir($dirPath);
-// deleteDirectory($dirPath);
+////////////////// //Delete GIT folder /////////////////////////
+$dirPath = $destination."/.git/*";
+$files = glob($dirPath); // get all file names
+foreach($files as $file){ // iterate files
+    if(is_file($file))
+    unlink($file); // delete file
+}
+$dirPath = $destination."/.git";
+empty_dir($dirPath);
+deleteDirectory($dirPath);
 
-///////////// //Delete Tours_B2B folder/////////////////////////
+/////////// //Delete Tours_B2B folder/////////////////////////
 if($setup_type!='4'){
 
     $dirPath = $destination."/Tours_B2B/*";
@@ -178,7 +178,7 @@ if($empty_setup=="Yes"){
             if($conn->query("SHOW TABLES LIKE '".$table_name."'")->num_rows==1) {
                 $query1 = $conn->query("truncate $table_name");     
                 if(!$query1){
-                    echo $query1->error;
+                    echo $query1['error'];
                 }
             }            
         }   
@@ -229,7 +229,9 @@ if($empty_setup=="Yes"){
     $key = "secret_key_for_iTours";
     // Store the cipher method
     $ciphering = "AES-128-CTR";
-            
+    $details_arr = array();
+    array_push($details_arr,array('product_name'=>$product_name,'database_name'=>$database_name,'username'=>$admin_username,'password'=>$admin_password));
+
     // Use OpenSSl Encryption method
     $iv_length = openssl_cipher_iv_length($ciphering);
     $options = 0;
@@ -238,11 +240,8 @@ if($empty_setup=="Yes"){
     $encryption_iv = '1234567891011121';
 
     // Use openssl_encrypt() function to encrypt the data
-    $admin_username = openssl_encrypt($admin_username, $ciphering,
-                $key, $options, $encryption_iv);
-    $admin_password = openssl_encrypt($admin_password, $ciphering,
-                $key, $options, $encryption_iv);
-
+    $admin_username = openssl_encrypt($admin_username, $ciphering, $key, $options, $encryption_iv);
+    $admin_password = openssl_encrypt($admin_password, $ciphering, $key, $options, $encryption_iv);
 
     $today_date = date('Y-m-d H:i');
     $generic_query = $conn->query("update format_image_master set is_selected = '1' where id='895'");
@@ -283,6 +282,6 @@ else{
     $generic_query = $conn->query("update app_settings set quot_format = '4', quot_img_url='https://itourscloud.com/destination_gallery/quotation-gallery/other-quotation-images/flight-portrait-creative.webp' where setting_id='1'");
     $conn->close();
 }
-echo "New Product is created successfully.";
+echo "New setup is created successfully.=".json_encode($details_arr);
 
 ?>
