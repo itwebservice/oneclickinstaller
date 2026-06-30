@@ -25,7 +25,7 @@ $source_db = "v14";
 $source = "../../V14";
 $destination = '../Projects/'.$product_name;
 
-$table_exclude = array('state_and_cities', 'user_assigned_roles', 'roles', 'role_master', 'bus_master', 'tour_budget_type', 'bank_name_master', 'bank_list_master', 'transport_agency_bus_master', 'city_master', 'currency_name_master', 'vendor_type_master', 'estimate_type_master', 'airport_list_master', 'references_master', 'country_state_list', 'country_list_master','gallary_master','destination_master','airline_master','airport_master','visa_crm_master','visa_type_master','sac_master','state_master','generic_count_master','office_expense_type','branch_assign','ledger_master','group_master','head_master','subgroup_master','cms_master','cms_master_entries','fixed_asset_master','meal_plan_master','modulewise_video_master','meal_plan_master','room_category_master','hotel_type_master','b2b_settings','b2b_settings_second','vehicle_type_master','tax_conditions','other_charges_master', 'ticket_master_airfile', 'ticket_entries_airfile', 'ticket_trip_entries_airfile','video_itinerary_master','app_settings','b2b_transfer_master','itinerary_master','tcs_master','hotel_master','hotel_vendor_images_entries','custom_package_master','custom_package_program','custom_package_hotels','custom_package_transport','custom_package_images','tax_master','format_image_master','service_duration_master','generic_settings', 'hotel_master','vendor_login','terms_and_conditions','inclusions_exclusions_master','format_image_master','excursion_master_tariff','excursion_master_tariff_basics','checklist_entities','to_do_entries');
+$table_exclude = array('state_and_cities', 'user_assigned_roles', 'roles', 'role_master', 'bus_master', 'tour_budget_type', 'bank_name_master', 'bank_list_master', 'transport_agency_bus_master', 'city_master', 'currency_name_master', 'vendor_type_master', 'estimate_type_master', 'airport_list_master', 'references_master', 'country_state_list', 'country_list_master','gallary_master','destination_master','airline_master','airport_master','visa_crm_master','visa_type_master','sac_master','state_master','generic_count_master','office_expense_type','branch_assign','ledger_master','group_master','head_master','subgroup_master','cms_master','cms_master_entries','fixed_asset_master','meal_plan_master','modulewise_video_master','meal_plan_master','room_category_master','hotel_type_master','b2b_settings','b2b_settings_second','vehicle_type_master','tax_conditions','other_charges_master', 'ticket_master_airfile', 'ticket_entries_airfile', 'ticket_trip_entries_airfile','video_itinerary_master','app_settings','b2b_transfer_master','itinerary_master','tcs_master','hotel_master','hotel_vendor_images_entries','custom_package_master','custom_package_program','custom_package_hotels','custom_package_transport','custom_package_images','tax_master','format_image_master','service_duration_master','generic_settings', 'hotel_master','vendor_login','terms_and_conditions','inclusions_exclusions_master','format_image_master','excursion_master_tariff','excursion_master_tariff_basics','checklist_entities','to_do_entries','b2c_testimonials','b2c_settings','b2c_team_details','b2c_meta_tags','b2c_blogs');
 
 if (!file_exists($destination)){
     mkdir($destination, 0777, true);
@@ -193,15 +193,17 @@ if($empty_setup=="Yes"){
     $query = $conn->query("delete from group_master where group_id >= '22'");
     $query = $conn->query("delete from head_master where head_id >= '14'");
     $query = $conn->query("delete from subgroup_master where subgroup_id >= '114'");
+    $query = $conn->query("delete from destination_master where dest_id >= '110'");
     $query = $conn->query("delete from gallary_master where entry_id >= '1086'");
     $query = $conn->query("delete from sac_master where sac_id >= '13'");
     $query = $conn->query("delete from visa_type_master where visa_type_id >= '12'");
     $query = $conn->query("delete from tax_master where entry_id >= '19'");
+    $query = $conn->query("delete from itinerary_master where entry_id >= '1007'");
 
 
 $query = $conn->query("delete from b2b_transfer_master where entry_id>'22'");
 
-    $query = $conn->query("delete from excursion_master_tariff where entry_id>'117'");
+    $query = $conn->query("delete from excursion_master_tariff where entry_id>'535'");
 
 $query = $conn->query("delete from excursion_master_tariff_basics where entry_id>'117'");
 
